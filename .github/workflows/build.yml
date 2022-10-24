@@ -14,7 +14,7 @@ jobs:
         env:
           HOMEBREW_VERBOSE_USING_DOTS: 1
         run: |
-          brew tap phil-blain/homebrew-versions
+          brew tap jahroots/homebrew-versions
           brew install qt@5.11 --verbose
           brew upgrade boost
           brew upgrade cmake
