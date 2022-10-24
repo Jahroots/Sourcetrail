@@ -6,16 +6,16 @@ on:
 
 jobs:
   macos:
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Brew tap phil-blain
+      - name: Brew tap
         env:
           HOMEBREW_VERBOSE_USING_DOTS: 1
         run: |
           brew tap jahroots/homebrew-versions
-          brew install qt@5.11 --verbose
+          brew install qt@5.11.1 --verbose
           brew upgrade boost
           brew upgrade cmake
       - name: Build
