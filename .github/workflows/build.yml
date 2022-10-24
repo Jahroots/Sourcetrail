@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: '*'
+
+jobs:
+  macos:
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Brew tap phil-blain
+        env:
+          HOMEBREW_VERBOSE_USING_DOTS: 1
+        run: |
+          brew tap phil-blain/homebrew-versions
+          brew install qt@5.11 --verbose
+          brew upgrade boost
+          brew upgrade cmake
+      - name: Build
+        env:
+          LDFLAGS: "-L/usr/local/opt/qt/lib"
+          CPPFLAGS: "-I/usr/local/opt/qt/include"
+        run: |
+          mkdir -p build/Release
+          cd build/Release
+          cmake -DCMAKE_BUILD_TYPE="Release" ../..
+          make Sourcetrail
+      
